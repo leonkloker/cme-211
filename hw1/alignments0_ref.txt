@@ -1,0 +1,5 @@
+GTA -1
+GAA 1 
+CAC 4
+TGA 0 7
+AAC 2

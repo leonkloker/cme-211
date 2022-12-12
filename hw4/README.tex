@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[mmddyyyy]{datetime}
+
+\title{Homework 4}
+\author{Leon Kloker}
+\date{\today}
+
+\begin{document}
+
+\section{Class Description}
+
+The Truss class can be used to calculate beam forces in a statically
+determined truss. The constructor takes two directories as input, one
+for the joints data file and one for the beams data file, which have
+to be formatted similarly as the example files. The constructor
+reads the data from both files using the \texttt{read\_beams} and 
+\texttt{read\_joints} methods and saves them in a \texttt{\_joints} 
+and \texttt{\_beams} dictionary, respectively. \\
+Then, the \texttt{statical\_determinancy} method checks if the method 
+of joints can be used to calculate the beam forces in the truss and 
+raises a RuntimeError if this is not the case.\\ 
+Lastly, the \texttt{calculate\_forces} method is invoked,
+which creates a sparse csr matrix in order to save the coefficients of
+the beam forces and reaction forces that appear when considering the static
+equilibrium at each joint. When the resulting matrix is singular, the method
+raises a RuntimeError as the truss is possibly unstable. If this is not the 
+case, the linear equation system is solved with a sparse solver and the 
+beam and reaction forces are saved in a \texttt{\_forces} array. When the print
+function is called on a Truss object, the calculated beam
+forces are listed.
+
+\section{Exemplary Usage}
+
+The main.py file can be used print the beam forces of a truss in the 
+following fashion:\\
+\texttt{\$ python3 main.py cme211-hw4-files/truss1/joints.dat\\ 
+cme211-hw4-files/truss1/beams.dat\\
+~Beam~~~~Force\\
+-----------------\\
+~~~~1~~~~~~~0.000\\
+~~~~2~~~~~~-1.000\\
+~~~~3~~~~~~~0.000\\
+~~~~4~~~~~~-1.000\\
+~~~~5~~~~~~~0.000\\
+~~~~6~~~~~~~0.000\\
+~~~~7~~~~~~-0.000\\
+~~~~8~~~~~~-1.414}
+\vspace{0.5cm}\\
+If an optional third directory is specified, the truss geometry 
+is plotted and saved in this directory.\\
+Time spent 6 hours.
+\end{document}
